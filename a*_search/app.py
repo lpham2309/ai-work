@@ -155,29 +155,29 @@ def parse_city_data_file(data_file):
     city_location = defaultdict(list)
     city_distance = defaultdict(list)
     city_count = 0
-    city_file = open(data_file)
-    for line in city_file.readlines():
-        city_result = city_data_regex.search(line)
-        city_distance_result = city_distance_regex.search(line)
-        if city_result != None:
-            city_name = city_result.group('city')
-            latitude = float(city_result.group('lat'))
-            longitude = float(city_result.group('lon'))
+    with open(data_file) as city_file:
+        for line in city_file.readlines():
+            city_result = city_data_regex.search(line)
+            city_distance_result = city_distance_regex.search(line)
+            if city_result != None:
+                city_name = city_result.group('city')
+                latitude = float(city_result.group('lat'))
+                longitude = float(city_result.group('lon'))
     
-            city_count = city_count + 1
-            city_location[city_name].append(latitude)
-            city_location[city_name].append(longitude)
-           
-        elif city_distance_result != None:
-            city1_name = city_distance_result.group('city1')
-            city2_name = city_distance_result.group('city2')
-            distance = float(city_distance_result.group('dist'))
-            city_distance[city1_name].append({
-                city2_name: distance
-            })
-            city_distance[city2_name].append({
-                city1_name: distance
-            })
+                city_count = city_count + 1
+                city_location[city_name].append(latitude)
+                city_location[city_name].append(longitude)
+               
+            elif city_distance_result != None:
+                city1_name = city_distance_result.group('city1')
+                city2_name = city_distance_result.group('city2')
+                distance = float(city_distance_result.group('dist'))
+                city_distance[city1_name].append({
+                    city2_name: distance
+                })
+                city_distance[city2_name].append({
+                    city1_name: distance
+                })
     sys.stdout.write("Reading data .... Done\n")
     sys.stdout.write(f'Number of cities: {city_count}\n')
     return city_location, city_distance
