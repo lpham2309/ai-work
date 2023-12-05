@@ -180,7 +180,8 @@ def parse_data_from_input(filename):
                         })
     return bayes_net
 
-def restructure_data_format(bh, is_book=False, inputs=dict()):
+def restructure_data_format(bh, is_book=False, inputs=None):
+    inputs = {} if inputs is None else inputs
     result = []
 
     bool_parser = {

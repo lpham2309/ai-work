@@ -139,7 +139,8 @@ class CSP():
                     print(" ", end="")
             print()
 
-    def backtracking_search(self, assignment={}):
+    def backtracking_search(self, assignment=None):
+        assignment = {} if assignment is None else assignment
         global RECURSIVE_CALLS
         if len(assignment) == len(self.csp.variables):
             sys.stdout.write(f'SUCCESS! Solution found after {RECURSIVE_CALLS} recursive calls to search\n')
