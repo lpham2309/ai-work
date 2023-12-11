@@ -113,8 +113,8 @@ def enumerate_all(variables, e, bayes_net):
 
 def parse_data_from_input(filename):
     bayes_net = {}
-    bayes_file = open(filename)
-    lines = bayes_file.readlines()
+    with open(filename) as bayes_file:
+        lines = bayes_file.readlines()
     results = []
     for idx, line in enumerate(lines):
         line = line.rstrip('\n')
