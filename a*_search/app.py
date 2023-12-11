@@ -21,7 +21,8 @@ class TreeNode():
         return str(self.city) == goal_city
 class PriorityQueue:
     
-    def __init__(self, iterable=[]):
+    def __init__(self, iterable=None):
+        iterable = [] if iterable is None else iterable
         self.heap = []
         for value in iterable:
             heappush(self.heap, (0, value))
